@@ -8,7 +8,11 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
 
     if @tweet.save
-      render partial: 'tweets', locals: {tweet: @tweet}
+      respond_to do |format|
+        format.html {render partial: 'tweets', locals: {tweet: @tweet}}
+        format.json {render json: @tweet, except: %i[updated_at]}
+      end
+
     else
       render :index
     end

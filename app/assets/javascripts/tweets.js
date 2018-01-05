@@ -11,10 +11,21 @@ document.addEventListener('DOMContentLoaded', function(){
       url: form.getAttribute('action'),
       method: form.getAttribute('method'),
       data: $(tweetMsg).serialize(),
-      dataType: 'html',
+      dataType: 'json',
     }).done(function(data) {
-      console.log(data)
-      ul.insertAdjacentHTML('afterbegin', data)
+      console.log(data.created_at)
+      var li = document.createElement('li'),
+          p = document.createElement('p'),
+          time = document.createElement('time');
+      li.className = 'tweet';
+      p.innerText = data.message
+      time.innerHTML = data.created_at.toLocaleString("en-US")
+      li.append(p);
+      li.append(time)
+      console.log(li)
+      $(ul).prepend(li)
+    }).fail(function() {
+      console.log('failed to tweet')
     })
   })
 })
