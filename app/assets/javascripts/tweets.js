@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
       dataType: 'html',
     }).done(function(data) {
       console.log(data)
-      $(ul).prepend( data)
+      ul.insertAdjacentHTML('afterbegin', data)
     })
   })
 })
